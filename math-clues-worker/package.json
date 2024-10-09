@@ -1,0 +1,21 @@
+{
+  "name": "math-clues-worker",
+  "version": "1.0.0",
+  "description": "Cloudflare Worker for math clues",
+  "main": "index.ts",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler publish"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.29.0",
+    "hono": "^3.0.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.0.0",
+    "wrangler": "^3.0.0"
+  }
+}

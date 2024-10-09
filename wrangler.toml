@@ -1,0 +1,7 @@
+name = "math-clues-worker"
+main = "src/index.ts"
+compatibility_date = "2023-01-01"
+
+[vars]
+# You'll set this in the Cloudflare dashboard or via wrangler secret
+# CLAUDE_API_KEY = "your_claude_api_key_here"
