@@ -27,3 +27,4 @@ dist-ssr
 
 *.tsbuildinfo
 math-clues-worker/wrangler.toml
+.env.production
