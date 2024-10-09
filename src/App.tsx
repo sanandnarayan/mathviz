@@ -32,6 +32,7 @@ function App() {
         <Routes>
           <Route path="/" element={
             <>
+              <Header>Math Question Clues</Header>
               <Clue />
             </>
           } />

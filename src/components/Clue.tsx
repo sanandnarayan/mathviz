@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-
-const WORKER_URL = 'https://math-clues-worker.codeanand.workers.dev'; // Replace with your actual Worker URL
+// if cloudflare dev mode, use localhost, else use prod
+// @ts-ignore
+const e = "dev";
+const WORKER_URL = e === "dev" ? 'http://localhost:8787' : 'https://math-clues-worker.codeanand.workers.dev';
 
 const getCluesFromClaude = async (question: string): Promise<string[]> => {
   try {
@@ -54,6 +56,12 @@ const Clue: React.FC = () => {
     }
   };
 
+  const handlePreviousClue = () => {
+    if (currentClueIndex > 0) {
+      setCurrentClueIndex(currentClueIndex - 1);
+    }
+  };
+
   return (
     <ClueContainer>
       <Title>Math Clues</Title>
@@ -64,7 +72,7 @@ const Clue: React.FC = () => {
           placeholder="Enter your math question here"
         />
         <SubmitButton type="submit" disabled={loading}>
-          {loading ? 'Thinking...' : 'Get Clues'}
+          {loading ? 'Clues take 50 seconds' : 'Get Clues'}
         </SubmitButton>
       </form>
       {error && <ErrorMessage>{error}</ErrorMessage>}
@@ -72,11 +80,18 @@ const Clue: React.FC = () => {
         <ClueBox>
           <ClueTitle>Clue {currentClueIndex + 1}</ClueTitle>
           <div dangerouslySetInnerHTML={{ __html: clues[currentClueIndex] }} />
-          {currentClueIndex < clues.length - 1 && (
-            <NextClueButton onClick={handleNextClue}>
-              Next Clue
-            </NextClueButton>
-          )}
+          <ButtonContainer>
+            {currentClueIndex > 0 && (
+              <NavigationButton onClick={handlePreviousClue}>
+                Previous Clue
+              </NavigationButton>
+            )}
+            {currentClueIndex < clues.length - 1 && (
+              <NavigationButton onClick={handleNextClue}>
+                Next Clue
+              </NavigationButton>
+            )}
+          </ButtonContainer>
         </ClueBox>
       )}
     </ClueContainer>
@@ -150,9 +165,13 @@ const ClueTitle = styled.h3`
   margin-bottom: 15px;
 `;
 
-const NextClueButton = styled.button`
-  display: block;
-  width: 100%;
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+`;
+
+const NavigationButton = styled.button`
   padding: 10px;
   font-size: 1.2rem;
   background-color: #7cb9e8;
@@ -161,7 +180,6 @@ const NextClueButton = styled.button`
   border-radius: 10px;
   cursor: pointer;
   transition: background-color 0.3s;
-  margin-top: 20px;
 
   &:hover {
     background-color: #5a9bd4;

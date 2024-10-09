@@ -1,6 +1,6 @@
 .App {
+  text-align: center;
   font-family: Arial, sans-serif;
-  padding: 20px;
 }
 
 h1 {
@@ -131,4 +131,48 @@ h1 {
   background: #eef;
   padding: 10px;
   border: 1px solid #99c;
+}
+
+.input-section {
+  margin: 20px;
+}
+
+.input-section label {
+  margin: 0 10px;
+}
+
+.visual-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+}
+
+.rectangle {
+  position: relative;
+  background-color: #f2c2c2; /* Light red to represent the red carpet */
+  border: 2px solid #ccc;
+}
+
+.dimension {
+  position: absolute;
+  background-color: #fff;
+  padding: 2px 5px;
+  font-size: 14px;
+}
+
+.dimension.length {
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.dimension.width {
+  right: -60px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.calculation-section {
+  margin: 20px;
 }

@@ -1,6 +1,0 @@
-name = "math-clues-worker"
-main = "index.ts"
-compatibility_date = "2023-01-01"
-
-[vars]
-# You'll set this in the Cloudflare dashboard or via wrangler secret
