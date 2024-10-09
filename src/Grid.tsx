@@ -11,7 +11,7 @@ interface GridProps {
 interface GridWrapperProps {
   width: number;
 }
-
+ 
 function Grid({ lengthFeet, widthFeet, lengthYards, widthYards }: GridProps) {
   const totalSquaresFeet = Math.ceil(lengthFeet) * Math.ceil(widthFeet);
   const totalSquaresYards = Math.ceil(lengthYards) * Math.ceil(widthYards);
