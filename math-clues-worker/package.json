@@ -4,7 +4,7 @@
   "description": "Cloudflare Worker for math clues",
   "main": "index.ts",
   "scripts": {
-    "dev": "wrangler dev",
+    "dev": "wrangler dev --env=local",
     "deploy": "wrangler publish"
   },
   "keywords": [],

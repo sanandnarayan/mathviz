@@ -1,14 +1,23 @@
-import { Hono } from 'hono';
+import { Context, Hono } from 'hono';
 import { cors } from 'hono/cors';
+import { env } from 'hono/adapter'
 import Anthropic from '@anthropic-ai/sdk';
 
 type Bindings = {
   CLAUDE_API_KEY: string;
+CORS_ORIGIN: string;
 };
 
 const app = new Hono<{ Bindings: Bindings }>();
+app.use("*", async (c, next) => {
+  const corsMiddlewareHandler = cors({
+    origin: c.env.CORS_ORIGIN,
+  });
+  return corsMiddlewareHandler(c, next);
+});
 
-app.use('*', cors());
+// if we are in dev mode, then allow any url
+// if we are in prod mode, then only allow only math.codeanand.com
 
 app.post('/api/get-clues', async (c) => {
   try {
@@ -29,7 +38,8 @@ ${question}
 Please provide the three SVG clues as separate artifacts.
 
 Rules:
-- Output in JSON format with keys: "text_msg" (any textual hint/msg you want to give the student), “clues” (list of svg)`
+- Output in JSON format with keys: "text_msg" (any textual hint/msg you want to give the student), “clues” (list of svg)
+- Do not add any other text to the response, only the JSON`
 
     const msg = await anthropic.messages.create({
       model: "claude-3-5-sonnet-20240620",

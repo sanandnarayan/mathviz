@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 // if cloudflare dev mode, use localhost, else use prod
-// @ts-ignore
+// this very ugly hack, is because we use vite locally and wrangler in cloudflare prod, 
+// FIXME wrangler env variables are only available in prod, so we need to use this hack
 const e = "dev";
 const WORKER_URL = e === "dev" ? 'http://localhost:8787' : 'https://math-clues-worker.codeanand.workers.dev';
 
